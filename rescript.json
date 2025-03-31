@@ -1,0 +1,18 @@
+{
+  "name": "rescript",
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": true
+    }
+  ],
+  "package-specs": {
+    "module": "esmodule",
+    "in-source": true,
+    "suffix": ".mjs"
+  },
+  "jsx": { "version": 4, "mode": "automatic" },
+  "bs-dependencies": ["@rescript/core", "@rescript/react"],
+  "bs-dev-dependencies": [],
+  "bsc-flags": ["-open RescriptCore"]
+}
