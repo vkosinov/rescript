@@ -3,12 +3,15 @@
 import * as JsxRuntime from "react/jsx-runtime";
 
 function App(props) {
-  return JsxRuntime.jsx("p", {
-    children: "Hello!",
-  });
+  return JsxRuntime.jsx("div", {
+              children: "Hello world!",
+              className: "text-3xl text-center m-5 text-gray-700"
+            });
 }
 
 var make = App;
 
-export { make };
+export {
+  make ,
+}
 /* react/jsx-runtime Not a pure module */
