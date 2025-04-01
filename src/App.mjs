@@ -4,13 +4,11 @@ import * as JsxRuntime from "react/jsx-runtime";
 
 function App(props) {
   return JsxRuntime.jsx("p", {
-              children: "Hello world!"
-            });
+    children: "Hello!",
+  });
 }
 
 var make = App;
 
-export {
-  make ,
-}
+export { make };
 /* react/jsx-runtime Not a pure module */
