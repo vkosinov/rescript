@@ -1,3 +1,11 @@
 @react.component
+let make = () => {
+  let (active, setActive) = React.useState(() => false)
 
-let make = () =>  <div className="text-3xl text-center m-5 text-gray-700">{React.string("Hello world!")}</div>
+  <div className="text-center m-5">
+    <div className="text-3xl text-center m-5 text-gray-700">
+      {active ? React.string("Active") : React.string("Not Active")}
+    </div>
+    <Button onClick={_ => setActive(active => !active)}> {React.string("Click me")} </Button>
+  </div>
+}
