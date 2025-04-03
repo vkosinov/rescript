@@ -16,11 +16,11 @@ function State(props) {
                       className: "text-lg"
                     }),
                 JsxRuntime.jsx("div", {
-                      children: match[0] ? "Active" : "Not Active",
+                      children: match[0] ? "Active" : "Inactive",
                       className: "text-3xl text-center m-5 text-gray-700"
                     }),
                 JsxRuntime.jsx(Button.make, {
-                      children: "Click me",
+                      children: "Toogle",
                       onClick: (function (param) {
                           setActive(function (active) {
                                 return !active;

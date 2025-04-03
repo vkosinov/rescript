@@ -6,15 +6,23 @@ import * as JsxRuntime from "react/jsx-runtime";
 
 function Reducer(props) {
   var match = React.useReducer((function (state, action) {
-          if (state === "Active") {
-            return "Inactive";
-          } else {
-            return "Active";
+          switch (action) {
+            case "Toggle" :
+                if (state === "ActiveValue") {
+                  return "InactiveValue";
+                } else {
+                  return "ActiveValue";
+                }
+            case "Active" :
+                return "ActiveValue";
+            case "Inactive" :
+                return "InactiveValue";
+            
           }
-        }), "Inactive");
+        }), "InactiveValue");
   var dispatch = match[1];
   var tmp;
-  tmp = match[0] === "Active" ? "Active" : "Inactive";
+  tmp = match[0] === "ActiveValue" ? "Active" : "Inactive";
   return JsxRuntime.jsxs("div", {
               children: [
                 JsxRuntime.jsx("h1", {
@@ -25,11 +33,28 @@ function Reducer(props) {
                       children: tmp,
                       className: "text-3xl text-center m-5 text-gray-700"
                     }),
-                JsxRuntime.jsx(Button.make, {
-                      children: "Click Me!",
-                      onClick: (function (param) {
-                          dispatch("Toggle");
-                        })
+                JsxRuntime.jsxs("div", {
+                      children: [
+                        JsxRuntime.jsx(Button.make, {
+                              children: "Toggle",
+                              onClick: (function (param) {
+                                  dispatch("Toggle");
+                                })
+                            }),
+                        JsxRuntime.jsx(Button.make, {
+                              children: "Active",
+                              onClick: (function (param) {
+                                  dispatch("Active");
+                                })
+                            }),
+                        JsxRuntime.jsx(Button.make, {
+                              children: "Inactive",
+                              onClick: (function (param) {
+                                  dispatch("Inactive");
+                                })
+                            })
+                      ],
+                      className: "flex gap-5 justify-center w-full"
                     })
               ],
               className: "text-center m-5 p-5 rounded-sm bg-lime-100"
