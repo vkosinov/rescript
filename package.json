@@ -7,7 +7,7 @@
     "res:build": "rescript",
     "res:clean": "rescript clean",
     "res:dev": "rescript build -w",
-    "dev": "vite",
+    "dev": "vite & rescript build -w",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -15,11 +15,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@ant-design-rescript/icons": "^0.0.3",
+    "@ant-design/icons": "^6.0.0",
     "@rescript/core": "^1.6.1",
     "@rescript/react": "^0.13.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "rescript": "^11.1.4"
+    "rescript": "^11.1.4",
+    "rescript-classnames": "^7.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.0",

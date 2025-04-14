@@ -11,8 +11,18 @@
     "in-source": true,
     "suffix": ".mjs"
   },
-  "jsx": { "version": 4, "mode": "automatic" },
-  "bs-dependencies": ["@rescript/core", "@rescript/react"],
+  "jsx": {
+    "version": 4,
+    "mode": "automatic"
+  },
+  "bs-dependencies": [
+    "@rescript/core",
+    "@rescript/react",
+    "rescript-classnames",
+    "@ant-design-rescript/icons"
+  ],
   "bs-dev-dependencies": [],
-  "bsc-flags": ["-open RescriptCore"]
+  "bsc-flags": [
+    "-open RescriptCore"
+  ]
 }
