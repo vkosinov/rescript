@@ -21,7 +21,13 @@ let make = () => {
     | Delete(idToDelete) => state->Belt.Array.keep(item => item.id != idToDelete)
     }
 
-  let (state, dispatch) = React.useReducer(reducer, [])
+  let (state, dispatch) = React.useReducer(
+    reducer,
+    switch LocalStorage.getJson("items") {
+    | Some(items) => Obj.magic(items)
+    | None => []
+    },
+  )
 
   let handleUpdate = (item: Item.t) => {
     dispatch(Update(item))
@@ -34,6 +40,12 @@ let make = () => {
   let handleRemove = (id: string) => {
     dispatch(Delete(id))
   }
+
+  React.useEffect1(() => {
+    LocalStorage.setJson("items", state)
+    Js.log(state)
+    None
+  }, [state])
 
   <div className="flex flex-col gap-5 max-w-8/10 w-full">
     {state

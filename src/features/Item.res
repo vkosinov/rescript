@@ -48,7 +48,10 @@ let make = (~item: t, ~onUpdate: t => unit, ~onRemove: string => unit) => {
       <Checkbox checked={false} onChange={check => handleCheck(check)}>
         <p className="text-m grow-1 text-left"> {React.string(item.name)} </p>
       </Checkbox>
-    | Done => <p className="text-m grow-1 text-left line-through"> {React.string(item.name)} </p>
+    | Done =>
+      <Checkbox checked={true} onChange={check => handleCheck(check)}>
+        <p className="text-m grow-1 text-left line-through"> {React.string(item.name)} </p>
+      </Checkbox>
     }}
     <div className="flex gap-3">
       {switch status {
