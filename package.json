@@ -7,7 +7,7 @@
     "res:build": "rescript",
     "res:clean": "rescript clean",
     "res:dev": "rescript build -w",
-    "dev": "vite & rescript build -w",
+    "dev": "rescript clean & vite & rescript build -w",
     "build": "vite build",
     "preview": "vite preview"
   },
