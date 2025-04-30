@@ -34,9 +34,15 @@ let make = () => {
     dispatch(Create(item))
   }
 
+  let handleRemove = (id: string) => {
+    dispatch(Delete(id))
+  }
+
   <div className="flex flex-col gap-5 max-w-8/10 w-full">
     {state
-    ->Belt.Array.map(item => <Item key=item.id item onChecked={handleCheck} />)
+    ->Belt.Array.map(item =>
+      <Item key=item.id item onChecked={handleCheck} onRemove={handleRemove} />
+    )
     ->React.array}
     <Add onCreate={handleAdd} />
   </div>

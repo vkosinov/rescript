@@ -9,7 +9,7 @@ type t = {
 type status = Idle | Edit | Done
 
 @react.component
-let make = (~item: t, ~onChecked: t => unit) => {
+let make = (~item: t, ~onChecked: t => unit, ~onRemove: string => unit) => {
   Js.log(item.done)
 
   let cx = Cx.cx
@@ -55,7 +55,7 @@ let make = (~item: t, ~onChecked: t => unit) => {
         </Button>
       | Done => React.null
       }}
-      <Button onClick={_ => setStatus(_ => Done)} variant={Danger}>
+      <Button onClick={_ => onRemove(item.id)} variant={Danger}>
         <Outlined.Delete />
       </Button>
     </div>
