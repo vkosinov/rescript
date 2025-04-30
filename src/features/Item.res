@@ -9,11 +9,18 @@ type t = {
 type status = Idle | Edit | Done
 
 @react.component
-let make = (~item: t, ~onChecked: bool => unit) => {
+let make = (~item: t, ~onChecked: t => unit) => {
+  Js.log(item.done)
+
   let cx = Cx.cx
 
   let (status, setStatus) = React.useState(() => item.done ? Done : Idle)
   let (value, setValue) = React.useState(() => item.name)
+
+  React.useEffect1(() => {
+    setStatus(_ => item.done ? Done : Idle)
+    None
+  }, [item.done])
 
   <div
     id={item.id}
@@ -31,7 +38,7 @@ let make = (~item: t, ~onChecked: bool => unit) => {
         <input value={value} onChange={event => setValue(ReactEvent.Form.target(event)["value"])} />
       </div>
     | Idle =>
-      <Checkbox checked={false} onChange={onChecked}>
+      <Checkbox checked={false} onChange={check => onChecked({...item, done: check})}>
         <p className="text-m grow-1 text-left"> {React.string(item.name)} </p>
       </Checkbox>
     | Done => <p className="text-m grow-1 text-left line-through"> {React.string(item.name)} </p>

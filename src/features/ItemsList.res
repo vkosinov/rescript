@@ -8,13 +8,15 @@ let make = () => {
     | Create(newItem) => [...state, newItem]
 
     | Update(updatedItem) =>
-      state->Belt.Array.map(item =>
+      state
+      ->Belt.Array.map(item =>
         if item.id == updatedItem.id {
           updatedItem
         } else {
           item
         }
       )
+      ->Belt.SortArray.stableSortBy((a, _b) => a.done ? 1 : -1)
 
     | Delete(idToDelete) => state->Belt.Array.keep(item => item.id != idToDelete)
     }
@@ -23,6 +25,9 @@ let make = () => {
 
   let handleCheck = (item: Item.t) => {
     dispatch(Update(item))
+
+    Js.log("Поле не должно быть пустым")
+    Js.log(state)
   }
 
   let handleAdd = (item: Item.t) => {
@@ -31,7 +36,7 @@ let make = () => {
 
   <div className="flex flex-col gap-5 max-w-8/10 w-full">
     {state
-    ->Belt.Array.map(item => <Item key=item.id item onChecked={_ => handleCheck(item)} />)
+    ->Belt.Array.map(item => <Item key=item.id item onChecked={handleCheck} />)
     ->React.array}
     <Add onCreate={handleAdd} />
   </div>
