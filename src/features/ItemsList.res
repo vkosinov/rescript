@@ -23,11 +23,8 @@ let make = () => {
 
   let (state, dispatch) = React.useReducer(reducer, [])
 
-  let handleCheck = (item: Item.t) => {
+  let handleUpdate = (item: Item.t) => {
     dispatch(Update(item))
-
-    Js.log("Поле не должно быть пустым")
-    Js.log(state)
   }
 
   let handleAdd = (item: Item.t) => {
@@ -41,7 +38,7 @@ let make = () => {
   <div className="flex flex-col gap-5 max-w-8/10 w-full">
     {state
     ->Belt.Array.map(item =>
-      <Item key=item.id item onChecked={handleCheck} onRemove={handleRemove} />
+      <Item key=item.id item onUpdate={handleUpdate} onRemove={handleRemove} />
     )
     ->React.array}
     <Add onCreate={handleAdd} />
