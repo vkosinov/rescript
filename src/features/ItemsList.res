@@ -21,13 +21,14 @@ let make = () => {
     | Delete(idToDelete) => state->Belt.Array.keep(item => item.id != idToDelete)
     }
 
-  let (state, dispatch) = React.useReducer(
-    reducer,
-    switch LocalStorage.getJson("items") {
-    | Some(items) => Obj.magic(items)
-    | None => []
-    },
-  )
+  let initialState: state = switch LocalStorage.getJson("items") {
+  | Some(items) => Utils.parseItems(items)
+  | None => []
+  }
+
+  let (state, dispatch) = React.useReducer(reducer, initialState)
+
+  Js.log(state)
 
   let handleUpdate = (item: Item.t) => {
     dispatch(Update(item))
