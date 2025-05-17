@@ -2,7 +2,7 @@ type state = array<Item.t>
 type action = Create(Item.t) | Update(Item.t) | Delete(string)
 
 @react.component
-let make = () => {
+let make = (~initialState: state) => {
   let reducer = (state: state, action: action): state =>
     switch action {
     | Create(newItem) => [...state, newItem]
@@ -21,25 +21,22 @@ let make = () => {
     | Delete(idToDelete) => state->Belt.Array.keep(item => item.id != idToDelete)
     }
 
-  let initialState: state = switch LocalStorage.getJson("items") {
-  | Some(items) => Utils.parseItems(items)
-  | None => []
-  }
-
   let (state, dispatch) = React.useReducer(reducer, initialState)
 
   Js.log(state)
+  Js.log("initialState")
+  Js.log(initialState)
 
   let handleUpdate = (item: Item.t) => {
-    dispatch(Update(item))
+    item->Update->dispatch
   }
 
   let handleAdd = (item: Item.t) => {
-    dispatch(Create(item))
+    item->Create->dispatch
   }
 
   let handleRemove = (id: string) => {
-    dispatch(Delete(id))
+    id->Delete->dispatch
   }
 
   React.useEffect1(() => {
